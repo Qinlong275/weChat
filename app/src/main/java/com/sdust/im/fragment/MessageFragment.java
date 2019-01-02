@@ -36,14 +36,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class MessageFragment extends Fragment implements RemoveListener {
+
 	private Context mContext;
 	private View mBaseView;
 	private TitleBarView mTitleBarView;
+	private View mEmptyView;
 	private List<MessageTabEntity> mMessageEntityList;
 	private SlideCutListView mMessageListView;
 	private FriendMessageAdapter adapter;
 	private BaseDialog mDialog;
-	private Handler handler;		//此handler责任重大，处理新消息的到达，更新消息列表
+	private Handler handler;        //此handler责任重大，处理新消息的到达，更新消息列表
 	private int mPosition;
 	private MessageTabEntity chooseMessageEntity;
 
@@ -62,6 +64,7 @@ public class MessageFragment extends Fragment implements RemoveListener {
 
 		mMessageListView = (SlideCutListView) mBaseView
 				.findViewById(R.id.message_list_listview);
+		mEmptyView = (View) mBaseView.findViewById(R.id.empty_layout);
 	}
 
 	private void initEvent() {
@@ -73,6 +76,7 @@ public class MessageFragment extends Fragment implements RemoveListener {
 					case 1:
 						adapter.notifyDataSetChanged();
 						mMessageListView.setSelection(mMessageEntityList.size());
+						changeEmptyStatus();
 						break;
 					default:
 						break;
@@ -81,11 +85,13 @@ public class MessageFragment extends Fragment implements RemoveListener {
 		};
 		ApplicationData.getInstance().setMessageHandler(handler);
 		mMessageEntityList = ApplicationData.getInstance().getMessageEntities();
+		changeEmptyStatus();
 		mMessageListView.setSelection(mMessageEntityList.size());
 		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE);
 		mTitleBarView.setTitleText("消息");
 		adapter = new FriendMessageAdapter(mContext, mMessageEntityList);
 		mMessageListView.setAdapter(adapter);
+		//列表点击事件处理
 		mMessageListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
@@ -145,12 +151,21 @@ public class MessageFragment extends Fragment implements RemoveListener {
 		mDialog.setButton1Background(R.drawable.btn_default_popsubmit);
 	}
 
+	private void changeEmptyStatus(){
+		if (mMessageEntityList.size() < 1){
+			mEmptyView.setVisibility(View.VISIBLE);
+		}else {
+			mEmptyView.setVisibility(View.GONE);
+		}
+	}
+
 	// 滑动删除之后的回调方法
 	@Override
 	public void removeItem(RemoveDirection direction, int position) {
 		MessageTabEntity temp = mMessageEntityList.get(position);
 		mMessageEntityList.remove(position);
 		adapter.notifyDataSetChanged();
+		changeEmptyStatus();
 		switch (direction) {
 			default:
 				ImDB.getInstance(mContext).deleteMessage(temp);

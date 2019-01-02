@@ -17,6 +17,7 @@
     <color name="grays">#818181</color>
     <color name="gray_font">#818181</color>
     <color name="common_title">#F9F9F9</color>
+    <color name="color_Background">#F5F5F5</color>
     <color name="pull_refresh_textview">#000000</color>
     <color name="gold">#000000</color>
     <color name="refresh_head_bg">#2B2B2B</color>
@@ -154,4 +155,5 @@
     <color name="bg_tips_normal">#ffe3ded0</color>
     <color name="bg_tips_press">#ffccc8bc</color>
     <color name="contact_indicator_color">#ff33b5e5</color>
+    <color name="colorPrimary">#3F51B5</color>
 </resources>

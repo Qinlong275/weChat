@@ -1,18 +1,18 @@
 package com.sdust.im.activity;
 
 import com.sdust.im.R;
-import com.sdust.im.activity.LoginActivity;
+import com.sdust.im.bean.ApplicationData;
 import com.sdust.im.databse.ImDB;
 import com.sdust.im.fragment.FriendListFragment;
 import com.sdust.im.fragment.MessageFragment;
 
 
-import com.sdust.im.fragment.NearByFragment;
-import com.sdust.im.fragment.UserInfoFragment;
+import com.sdust.im.fragment.NewsFragment;
 
 import com.sdust.im.network.NetService;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,13 +23,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
@@ -47,12 +47,11 @@ public class MainActivity extends FragmentActivity {
 
 	private PopupWindow mPopupWindow;
 	private LinearLayout buttomBarGroup;
+	private NavigationView navigationView;
 
 	MessageFragment messageFragment;
 	FriendListFragment constactFatherFragment;
-	NearByFragment dynamicFragment;
-	UserInfoFragment settingFragment;
-
+	NewsFragment mNewsFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,18 +68,19 @@ public class MainActivity extends FragmentActivity {
 		mNews = (ImageButton) findViewById(R.id.buttom_news);
 		mConstact = (ImageButton) findViewById(R.id.buttom_constact);
 		mDeynaimic = (ImageButton) findViewById(R.id.buttom_deynaimic);
-		mSetting = (ImageButton) findViewById(R.id.buttom_setting);
 
 		app_cancle = (TextView) mPopView.findViewById(R.id.app_cancle);
 		app_change = (TextView) mPopView.findViewById(R.id.app_change_user);
 		app_exit = (TextView) mPopView.findViewById(R.id.app_exit);
+
+		navigationView = (NavigationView)findViewById(R.id.nav_view);
+		((ImageView)(navigationView.getHeaderView(0).findViewById(R.id.icon_image))).setImageBitmap(ApplicationData.getInstance().getUserPhoto());
 	}
 
 	private void initEvent() {
 		mNews.setOnClickListener(newsOnClickListener);
 		mConstact.setOnClickListener(constactOnClickListener);
 		mDeynaimic.setOnClickListener(deynaimicOnClickListener);
-		mSetting.setOnClickListener(settingOnClickListener);
 
 		mConstact.performClick();
 
@@ -149,28 +149,12 @@ public class MainActivity extends FragmentActivity {
 		public void onClick(View v) {
 			FragmentManager fm = getSupportFragmentManager();
 			FragmentTransaction ft = fm.beginTransaction();
-			if (dynamicFragment == null) {
-				dynamicFragment = new NearByFragment();
+			if (mNewsFragment == null) {
+				mNewsFragment = new NewsFragment();
 			}
-			ft.replace(R.id.fl_content, dynamicFragment, MainActivity.TAG);
+			ft.replace(R.id.fl_content, mNewsFragment, MainActivity.TAG);
 			ft.commit();
 			setButton(v);
-
-		}
-	};
-
-	private OnClickListener settingOnClickListener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			FragmentManager fm = getSupportFragmentManager();
-			FragmentTransaction ft = fm.beginTransaction();
-			if (settingFragment == null) {
-				settingFragment = new UserInfoFragment();
-			}
-			ft.replace(R.id.fl_content, settingFragment, MainActivity.TAG);
-			ft.commit();
-			setButton(v);
-
 		}
 	};
 

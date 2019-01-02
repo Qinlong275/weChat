@@ -13,9 +13,8 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10.0dip"
-        android:src="@drawable/channel_qq"
-        android:contentDescription="@string/app_name" 
-        android:scaleType="fitXY"/>
+        android:src="@drawable/chat_av"
+        android:scaleType="centerCrop"/>
 
     <ImageView
         android:id="@+id/stateicon"

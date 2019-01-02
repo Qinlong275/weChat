@@ -7,15 +7,15 @@
         android:id="@+id/title_bar"
         android:layout_height="50dp"
         android:layout_width="match_parent">
-        <Button 
+        <TextView
             android:id="@+id/title_btn_left"
             android:layout_height="40dp"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:textColor="@color/blue"
-            android:textSize="16sp"
-            android:background="@color/common_title"/>
+            android:gravity="center"
+            android:textSize="16sp"/>
         <TextView 
             android:id="@+id/title_txt"
             android:layout_height="40dp"
@@ -25,7 +25,7 @@
             android:textSize="18sp"
             android:textColor="@color/blue"
             android:textStyle="bold"/>
-        <Button 
+        <ImageView
             android:id="@+id/title_btn_right"
             android:layout_height="30dp"
             android:layout_width="wrap_content"

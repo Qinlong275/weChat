@@ -4,6 +4,11 @@
      <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+
+    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="Theme.Light.CustomDialog" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">@drawable/transparent</item>
         <item name="android:windowFrame">@null</item>

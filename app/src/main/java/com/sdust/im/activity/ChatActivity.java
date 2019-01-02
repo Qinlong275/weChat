@@ -53,7 +53,6 @@ public class ChatActivity extends BaseActivity {
 
 	@Override
 	protected void initViews() {
-		// TODO Auto-generated method stub
 		mTitleBarView = (TitleBarView) findViewById(R.id.title_bar);
 		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE);
 		mTitleBarView.setTitleText("与" + friendName + "对话");
@@ -79,22 +78,21 @@ public class ChatActivity extends BaseActivity {
 			}
 		};
 		ApplicationData.getInstance().setChatHandler(handler);
-		chatList = ApplicationData.getInstance().getChatMessagesMap()
-				.get(friendId);
+		chatList = ApplicationData.getInstance().getChatMessagesMap().get(friendId);
 		if(chatList == null){
 			chatList = ImDB.getInstance(ChatActivity.this).getChatMessage(friendId);
 			ApplicationData.getInstance().getChatMessagesMap().put(friendId, chatList);
 		}
 		chatMessageAdapter = new ChatMessageAdapter(ChatActivity.this,chatList);
 		chatMeessageListView.setAdapter(chatMessageAdapter);
+		//发送消息
 		sendButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				String content = inputEdit.getText().toString();
 				inputEdit.setText("");
 				ChatEntity chatMessage = new ChatEntity();
 				chatMessage.setContent(content);
-				chatMessage.setSenderId(ApplicationData.getInstance()
-						.getUserInfo().getId());
+				chatMessage.setSenderId(ApplicationData.getInstance().getUserInfo().getId());
 				chatMessage.setReceiverId(friendId);
 				chatMessage.setMessageType(ChatEntity.SEND);
 				Date date = new Date();
@@ -105,10 +103,14 @@ public class ChatActivity extends BaseActivity {
 				chatMessageAdapter.notifyDataSetChanged();
 				chatMeessageListView.setSelection(chatList.size());
 				UserAction.sendMessage(chatMessage);
-				ImDB.getInstance(ChatActivity.this)
-						.saveChatMessage(chatMessage);
+				ImDB.getInstance(ChatActivity.this).saveChatMessage(chatMessage);
 			}
 		});
 	}
 
+	@Override
+	protected void onDestroy() {
+		ApplicationData.getInstance().setChatHandler(null);
+		super.onDestroy();
+	}
 }

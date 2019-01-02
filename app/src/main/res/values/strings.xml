@@ -42,7 +42,7 @@
     <string name="app_cancle">取消</string>
     <string name="app_change_user">注销用户</string>
     <string name="app_exit_user">退出</string>
-    
+
     <!-- Refresh -->
     <string name="p2refresh_head_load_more">加载更多</string>
     <string name="p2refresh_end_load_more">更    多</string>
@@ -52,7 +52,7 @@
     <string name="p2refresh_doing_head_refresh">正在刷新&#8230;</string>
     <string name="p2refresh_doing_end_refresh">加载中&#8230;</string>
     <string name="p2refresh_refresh_lasttime">最近更新&#160;&#058;&#160;</string>
-    
+
     <!-- ercode -->
     <string name="scan_tip">请将二维码置于取景框内扫描</string>
     <string name="scan_retry">二维码扫描出错啦,请重新扫描</string>
@@ -81,15 +81,15 @@
     <string name="tv_phone">通讯录</string>
     <string name="tv_group">群组</string>
     <string name="tv_discuss">讨论组</string>
-    <string name="tv_life">生活服务</string>   
-    <string name="friend_group">好友分组</string> 
+    <string name="tv_life">生活服务</string>
+    <string name="friend_group">好友分组</string>
     <string name="device">我的设备</string>
     <string name="group_count">1/2</string>
     <string name="child_feel">[在线]好好学习天天向上</string>
     <string name="tv_call1">你通话过的联系人都会在这里出现</string>
     <string name="tv_call2">快和朋友开始语音通话吧</string>
     <string name="btn_call">找人聊聊</string>
-    
+
     <string name="recentchat">最近聊天</string>
     <string name="choose_constact">选择联系人</string>
     <string name="search">请输入关键字</string>
@@ -98,7 +98,7 @@
     <string name="tv_newfriend">新朋友</string>
     <string name="tv_tongxunlu">通讯录</string>
     <string name="tv_friend">QQ好友</string>
-    
+
     <string name="wifi_state">WLAN 状态</string>
     <string name="instruction_pre">启动服务，可以从电脑远程管理手机文件</string>
     <string name="instruction">请在"我的电脑"地址栏输入:</string>

@@ -24,7 +24,7 @@ public class ApplicationData {
 
 	private static ApplicationData mInitData;
 
-	private User mUser;
+	private User mUser;	//用户自己
 	private boolean mIsReceived;
 	private List<User> mFriendList;		//好友列表
 	private TranObject mReceivedMessage;
@@ -59,10 +59,14 @@ public class ApplicationData {
 		return mInitData;
 	}
 
-	private ApplicationData() {
-
+	public void initData(Context comtext) {
+		System.out.println("qintest initdata");
+		mContext = comtext;
+		mIsReceived = false;
+		mFriendList = null;
+		mUser = null;
+		mReceivedMessage = null;
 	}
-
 	public void start() {
 		System.out.println("qintest start login");
 		new Thread(new Runnable() {
@@ -92,6 +96,7 @@ public class ApplicationData {
 		System.out.println("qintest 登陆fanhui");
 	}
 
+	//登陆成功，获取相关消息数据
 	public void loginMessageArrived(Object tranObject) {
 
 		mReceivedMessage = (TranObject) tranObject;
@@ -121,54 +126,6 @@ public class ApplicationData {
 		mIsReceived = true;
 	}
 
-	public Map<Integer, Bitmap> getFriendPhotoMap() {
-		return mFriendPhotoMap;
-	}
-
-	public void setFriendPhotoList(Map<Integer, Bitmap> mFriendPhotoMap) {
-		this.mFriendPhotoMap = mFriendPhotoMap;
-	}
-
-	public User getUserInfo() {
-		return mUser;
-	}
-
-	public List<User> getFriendList() {
-		return mFriendList;
-	}
-
-	public void initData(Context comtext) {
-		System.out.println("qintest initdata");
-		mContext = comtext;
-		mIsReceived = false;
-		mFriendList = null;
-		mUser = null;
-		mReceivedMessage = null;
-	}
-
-	public TranObject getReceivedMessage() {
-		return mReceivedMessage;
-	}
-
-	public void setReceivedMessage(TranObject mReceivedMessage) {
-		this.mReceivedMessage = mReceivedMessage;
-	}
-
-	public List<User> getFriendSearched() {
-		return mFriendSearched;
-	}
-
-	public void setFriendSearched(List<User> mFriendSearched) {
-        System.out.println("setFriendSearched : " + mFriendSearched.size());
-		this.mFriendSearched = mFriendSearched;
-		Intent intent = new Intent(mTempContext, FriendSearchResultActivity.class);
-		mTempContext.startActivity(intent);
-	}
-
-	public void saveContext(Context context){
-		mTempContext = context;
-	}
-
 	//好友请求
 	public void friendRequestArrived(TranObject mReceivedRequest) {
 		MessageTabEntity messageEntity = new MessageTabEntity();
@@ -181,17 +138,16 @@ public class ApplicationData {
 			messageEntity.setContent("接受了你的好友请求");
 			User newFriend = (User) mReceivedRequest.getObject();
 			if (!mFriendList.contains(newFriend)) {
-
 				mFriendList.add(newFriend);
 			}
 			
-			mFriendPhotoMap.put(newFriend.getId(),
-					PhotoUtils.getBitmap(newFriend.getPhoto()));
+			mFriendPhotoMap.put(newFriend.getId(), PhotoUtils.getBitmap(newFriend.getPhoto()));
 			if (friendListHandler != null) {
 				Message message = new Message();
 				message.what = 1;
 				friendListHandler.sendMessage(message);
 			}
+			//缓存好友信息
 			ImDB.getInstance(mContext).saveFriend(newFriend);
 		} else {
 			messageEntity
@@ -204,6 +160,7 @@ public class ApplicationData {
 		messageEntity.setUnReadCount(1);
 		ImDB.getInstance(mContext).saveMessage(messageEntity);
 		mMessageEntities.add(messageEntity);
+		//通知消息列表
 		if (messageHandler != null) {
 			Message message = new Message();
 			message.what = 1;
@@ -228,6 +185,7 @@ public class ApplicationData {
 				hasMessageTab = true;
 			}
 		}
+		//新消息
 		if (!hasMessageTab) {
 			MessageTabEntity messageTab = new MessageTabEntity();
 			messageTab.setContent(chat.getContent());
@@ -247,6 +205,7 @@ public class ApplicationData {
 			getChatMessagesMap().put(chat.getSenderId(), chatList);
 		}
 		chatList.add(chat);
+		//缓存消息
 		ImDB.getInstance(mContext).saveChatMessage(chat);
 		if (messageHandler != null) {
 			Message message = new Message();
@@ -259,6 +218,8 @@ public class ApplicationData {
 			chatMessageHandler.sendMessage(message);
 		}
 	}
+
+
 
 	public Bitmap getUserPhoto() {
 		return mUserPhoto;
@@ -286,5 +247,45 @@ public class ApplicationData {
 
 	public void setfriendListHandler(Handler handler) {
 		this.friendListHandler = handler;
+	}
+
+	public Map<Integer, Bitmap> getFriendPhotoMap() {
+		return mFriendPhotoMap;
+	}
+
+	public void setFriendPhotoList(Map<Integer, Bitmap> mFriendPhotoMap) {
+		this.mFriendPhotoMap = mFriendPhotoMap;
+	}
+
+	public User getUserInfo() {
+		return mUser;
+	}
+
+	public List<User> getFriendList() {
+		return mFriendList;
+	}
+
+	public TranObject getReceivedMessage() {
+		return mReceivedMessage;
+	}
+
+	public void setReceivedMessage(TranObject mReceivedMessage) {
+		this.mReceivedMessage = mReceivedMessage;
+	}
+
+	public List<User> getFriendSearched() {
+		return mFriendSearched;
+	}
+
+	//搜索好友回调
+	public void setFriendSearched(List<User> mFriendSearched) {
+		System.out.println("setFriendSearched : " + mFriendSearched.size());
+		this.mFriendSearched = mFriendSearched;
+		Intent intent = new Intent(mTempContext, FriendSearchResultActivity.class);
+		mTempContext.startActivity(intent);
+	}
+
+	public void saveContext(Context context){
+		mTempContext = context;
 	}
 }

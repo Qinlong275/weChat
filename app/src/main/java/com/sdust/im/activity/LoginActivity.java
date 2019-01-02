@@ -129,6 +129,7 @@ public class LoginActivity extends BaseActivity {
                     User user = new User();
                     user.setAccount(account);
                     user.setPassword(password);
+                    user.setUserBriefIntro("我是大帅哥~");
                     UserAction.loginVerify(user);
                     ApplicationData data = ApplicationData.getInstance();
                     data.initData(LoginActivity.this);

@@ -23,7 +23,6 @@ public class FriendListAdapter extends BaseAdapter {
 	public FriendListAdapter(Context context, List<User> vector) {
 		this.mFriendList = vector;
 		mInflater = LayoutInflater.from(context);
-		System.out.println("初始化FriendAdapter");
 	}
 	@Override
 	public View getView(int position, View convertView, ViewGroup root) {

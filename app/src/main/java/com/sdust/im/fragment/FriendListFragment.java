@@ -28,10 +28,11 @@ import android.widget.ListView;
 public class FriendListFragment extends Fragment {
 	private Context mContext;
 	private View mBaseView;
+	private View mEmptyView;
 	private TitleBarView mTitleBarView;
 	private ListView mFriendListView;
 	private List<User> mFriendList;
-	private Handler handler;
+	private Handler handler;		//处理新的好友列表变化消息
 	private FriendListAdapter adapter;
 
 	@Override
@@ -39,28 +40,30 @@ public class FriendListFragment extends Fragment {
 			Bundle savedInstanceState) {
 		mContext = getActivity();
 		mBaseView = inflater.inflate(R.layout.fragment_friendlist, null);
-		System.out.println("初始化friendListFragment");
-		findView();
+		initView();
 		init();
 		return mBaseView;
 	}
 
-	private void findView() {
+	private void initView() {
 		mTitleBarView = (TitleBarView) mBaseView.findViewById(R.id.title_bar);
+		mTitleBarView.setBackgroundResource(R.color.common_title);
 		mFriendListView = (ListView)mBaseView.findViewById(R.id.friend_list_listview);
-		
+		mEmptyView = (View) mBaseView.findViewById(R.id.empty_layout);
 	}
 
 	private void init() {
 		mFriendList = ApplicationData.getInstance().getFriendList();
 		adapter = new FriendListAdapter(mContext, mFriendList);
 		mFriendListView.setAdapter(adapter);
+		changeEmptyStatus();
 		handler = new Handler() {
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
 				case 1:
 					adapter.notifyDataSetChanged();
 					mFriendListView.setSelection(mFriendList.size());
+					changeEmptyStatus();
 					break;
 				default:
 					break;
@@ -92,5 +95,13 @@ public class FriendListFragment extends Fragment {
 			}
 		});
 		
+	}
+
+	private void changeEmptyStatus(){
+		if (mFriendList.size() < 1){
+			mEmptyView.setVisibility(View.VISIBLE);
+		}else {
+			mEmptyView.setVisibility(View.GONE);
+		}
 	}
 }
