@@ -7,6 +7,7 @@ import com.sdust.im.BaseDialog;
 import com.sdust.im.R;
 import com.sdust.im.action.UserAction;
 import com.sdust.im.activity.ChatActivity;
+import com.sdust.im.activity.MainActivity;
 import com.sdust.im.activity.SearchFriendActivity;
 import com.sdust.im.activity.register.RegisterActivity;
 import com.sdust.im.adapter.FriendListAdapter;
@@ -87,8 +88,9 @@ public class MessageFragment extends Fragment implements RemoveListener {
 		mMessageEntityList = ApplicationData.getInstance().getMessageEntities();
 		changeEmptyStatus();
 		mMessageListView.setSelection(mMessageEntityList.size());
-		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE);
+		mTitleBarView.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE);
 		mTitleBarView.setTitleText("消息");
+		mTitleBarView.setBtnLeftOnclickListener((MainActivity)mContext);
 		adapter = new FriendMessageAdapter(mContext, mMessageEntityList);
 		mMessageListView.setAdapter(adapter);
 		//列表点击事件处理

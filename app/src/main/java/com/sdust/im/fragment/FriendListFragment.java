@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sdust.im.R;
 import com.sdust.im.activity.ChatActivity;
+import com.sdust.im.activity.MainActivity;
 import com.sdust.im.activity.SearchFriendActivity;
 import com.sdust.im.adapter.FriendListAdapter;
 import com.sdust.im.bean.ApplicationData;
@@ -73,8 +74,8 @@ public class FriendListFragment extends Fragment {
 		ApplicationData.getInstance().setfriendListHandler(handler);
 		mTitleBarView.setCommonTitle(View.VISIBLE, View.VISIBLE, View.VISIBLE);
 		mTitleBarView.setTitleText("好友");
-		mTitleBarView.setBtnLeft(R.string.control);
 		mTitleBarView.setBtnRight(R.drawable.qq_constact);
+		mTitleBarView.setBtnLeftOnclickListener((MainActivity)mContext);
 		
 		mFriendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			

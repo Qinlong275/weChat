@@ -7,7 +7,7 @@
         android:id="@+id/title_bar"
         android:layout_height="50dp"
         android:layout_width="match_parent">
-        <TextView
+        <ImageView
             android:id="@+id/title_btn_left"
             android:layout_height="40dp"
             android:layout_width="wrap_content"
@@ -15,7 +15,8 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/blue"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:src="@drawable/ic_home"/>
         <TextView 
             android:id="@+id/title_txt"
             android:layout_height="40dp"

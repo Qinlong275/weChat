@@ -2,6 +2,7 @@ package com.sdust.im.fragment;
 
 import com.sdust.im.R;
 import com.sdust.im.activity.ContentActivity;
+import com.sdust.im.activity.MainActivity;
 import com.sdust.im.adapter.TitleAdapter;
 import com.sdust.im.bean.News;
 import com.sdust.im.bean.NewsList;
@@ -63,8 +64,9 @@ public class NewsFragment extends Fragment{
 	}
 	
 	private void initEvent(){
-		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE);
+		mTitleBarView.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE);
 		mTitleBarView.setTitleText("体育新闻");
+		mTitleBarView.setBtnLeftOnclickListener((MainActivity)mContext);
 		adapter = new TitleAdapter(this.getActivity(),R.layout.news_list_view_item, titleList);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -116,22 +118,26 @@ public class NewsFragment extends Fragment{
 						titleList.add(title);
 					}
 
-					getActivity().runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							adapter.notifyDataSetChanged();
-							listView.setSelection(0);
-							refreshLayout.setRefreshing(false);
-						};
-					});
+					if (getActivity() != null){
+						getActivity().runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								adapter.notifyDataSetChanged();
+								listView.setSelection(0);
+								refreshLayout.setRefreshing(false);
+							};
+						});
+					}
 				}else{
-					getActivity().runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							Toast.makeText(NewsFragment.this.getActivity(), "数据错误返回",Toast.LENGTH_SHORT).show();
-							refreshLayout.setRefreshing(false);
-						}
-					});
+					if (getActivity() != null){
+						getActivity().runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								Toast.makeText(NewsFragment.this.getActivity(), "数据错误返回,请稍后重试",Toast.LENGTH_SHORT).show();
+								refreshLayout.setRefreshing(false);
+							}
+						});
+					}
 				}
 			}
 		});

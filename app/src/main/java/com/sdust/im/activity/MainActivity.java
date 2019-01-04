@@ -16,6 +16,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -33,7 +35,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnClickListener{
 
 	protected static final String TAG = "MainActivity";
 	private Context mContext;
@@ -48,6 +50,7 @@ public class MainActivity extends FragmentActivity {
 	private PopupWindow mPopupWindow;
 	private LinearLayout buttomBarGroup;
 	private NavigationView navigationView;
+	private DrawerLayout drawerLayout;
 
 	MessageFragment messageFragment;
 	FriendListFragment constactFatherFragment;
@@ -63,6 +66,7 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void initView() {
+		drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 		mPopView = LayoutInflater.from(mContext).inflate(R.layout.app_exit, null);
 		buttomBarGroup = (LinearLayout) findViewById(R.id.buttom_bar_group);
 		mNews = (ImageButton) findViewById(R.id.buttom_news);
@@ -192,5 +196,10 @@ public class MainActivity extends FragmentActivity {
 	public void onBackPressed() {
 		NetService.getInstance().closeConnection();
 		super.onBackPressed();
+	}
+
+	@Override
+	public void onClick(View view) {
+		drawerLayout.openDrawer(GravityCompat.START);
 	}
 }
