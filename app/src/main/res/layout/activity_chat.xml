@@ -19,7 +19,6 @@
     </ListView>
 
     <LinearLayout
-        android:id="@+id/cb0ChatLayoutMsg"
         android:layout_width="fill_parent"
       	android:layout_height="wrap_content"
         android:background="@drawable/bg_chatbar_textmode"

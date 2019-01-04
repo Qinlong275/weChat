@@ -30,8 +30,11 @@
                     android:id="@+id/reg_account_et_account"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:background="@drawable/edittext_default"
-                    android:hint="输入用户账号"
+                    android:background="@drawable/register_user_btn"
+                    android:hint="起个名字吧"
+                    android:paddingTop="13dp"
+                    android:paddingLeft="6dp"
+                    android:paddingBottom="13dp"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="18"
@@ -58,7 +61,6 @@
                     android:visibility="gone" />
 
                 <LinearLayout
-                    android:id="@+id/reg_account_layout_note"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_below="@+id/reg_account_htv_notice"
@@ -74,7 +76,7 @@
                         android:focusable="true"
                         android:textColor="@color/notes_color"
                         android:textSize="14sp" 
-                        android:text="6~18个字符，可使用小写字母、数字、下划线"/>
+                        android:text="请按照标准使用小写字母、数字、下划线"/>
            
                 </LinearLayout>
             </RelativeLayout>

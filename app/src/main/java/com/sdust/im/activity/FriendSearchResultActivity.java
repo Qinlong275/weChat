@@ -1,29 +1,24 @@
 package com.sdust.im.activity;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.sdust.im.R;
 import com.sdust.im.action.UserAction;
 import com.sdust.im.adapter.FriendSearchResultAdapter;
 import com.sdust.im.bean.ApplicationData;
-import com.sdust.im.bean.TranObject;
 import com.sdust.im.bean.User;
 import com.sdust.im.global.Result;
 import com.sdust.im.view.TitleBarView;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class FriendSearchResultActivity extends Activity{
 
@@ -82,6 +77,7 @@ public class FriendSearchResultActivity extends Activity{
 					.setCancelable(true)
 					.setPositiveButton("是",new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,int id) {
+							Toast.makeText(FriendSearchResultActivity.this,"发送请求成功",Toast.LENGTH_SHORT).show();
 								UserAction.sendFriendRequest(Result.MAKE_FRIEND_REQUEST,requestee.getId());
 						}
 					  })

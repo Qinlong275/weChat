@@ -1,7 +1,5 @@
 package com.sdust.im.bean;
 
-import java.sql.Date;
-
 /**
  * 类名：MessageEntity 说明：messageFragment显示的消息
  */

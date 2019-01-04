@@ -5,16 +5,13 @@ import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 import java.net.Socket;
 
-import com.sdust.im.activity.LoginActivity;
 import com.sdust.im.activity.SearchFriendActivity;
 import com.sdust.im.activity.register.StepAccount;
 import com.sdust.im.activity.register.StepPhoto;
 import com.sdust.im.bean.ApplicationData;
 import com.sdust.im.bean.TranObject;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 
 //客户端响应服务端消息的Thread
 public class ClientListenThread extends Thread {

@@ -14,7 +14,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -238,7 +237,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,
 				if (mStepAccount == null) {
 					mStepAccount = new StepAccount(this, mVfFlipper.getChildAt(0));
 				}
-				mHeaderLayout.setTitleRightText("注册新账号", null, "1/5");
+				mHeaderLayout.setTitleRightText("申请账号", null, "1/5");
 				mBtnPrevious.setText("返    回");
 				mBtnNext.setText("下一步");
 				return mStepAccount;
@@ -257,7 +256,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,
 				if (mStepBaseInfo == null) {
 					mStepBaseInfo = new StepBaseInfo(this, mVfFlipper.getChildAt(2));
 				}
-				mHeaderLayout.setTitleRightText("填写基本资料", null, "3/5");
+				mHeaderLayout.setTitleRightText("基本资料", null, "3/5");
 				mBtnPrevious.setText("上一步");
 				mBtnNext.setText("下一步");
 				return mStepBaseInfo;
@@ -275,7 +274,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,
 				if (mStepPhoto == null) {
 					mStepPhoto = new StepPhoto(this, mVfFlipper.getChildAt(4));
 				}
-				mHeaderLayout.setTitleRightText("设置头像", null, "5/5");
+				mHeaderLayout.setTitleRightText("潇洒的头像", null, "5/5");
 				mBtnPrevious.setText("上一步");
 				mBtnNext.setText("注    册");
 				//注册的最后一步汇总所有信息

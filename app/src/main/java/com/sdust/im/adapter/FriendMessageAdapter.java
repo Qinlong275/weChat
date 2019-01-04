@@ -1,13 +1,10 @@
 package com.sdust.im.adapter;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.sdust.im.R;
 import com.sdust.im.bean.ApplicationData;
 import com.sdust.im.bean.MessageTabEntity;
-import com.sdust.im.bean.User;
-import com.sdust.im.util.PhotoUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

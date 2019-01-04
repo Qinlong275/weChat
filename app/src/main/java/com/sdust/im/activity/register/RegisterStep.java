@@ -1,13 +1,10 @@
 package com.sdust.im.activity.register;
 
-import java.util.regex.Pattern;
-
 import com.sdust.im.network.NetService;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.EditText;
 
 public abstract class RegisterStep {
 	protected RegisterActivity mActivity;

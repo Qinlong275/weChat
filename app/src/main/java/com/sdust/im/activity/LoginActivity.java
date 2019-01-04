@@ -7,14 +7,11 @@ import com.sdust.im.R;
 import com.sdust.im.action.UserAction;
 import com.sdust.im.activity.register.RegisterActivity;
 import com.sdust.im.bean.ApplicationData;
-import com.sdust.im.bean.TranObject;
 import com.sdust.im.bean.User;
 import com.sdust.im.global.Result;
-import com.sdust.im.network.NetConnect;
 import com.sdust.im.network.NetService;
 import com.sdust.im.util.VerifyUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,12 +20,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 public class LoginActivity extends BaseActivity {
 

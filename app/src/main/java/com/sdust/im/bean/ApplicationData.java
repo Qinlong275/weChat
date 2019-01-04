@@ -1,6 +1,5 @@
 package com.sdust.im.bean;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +10,9 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 
-import com.sdust.im.activity.ChatActivity;
 import com.sdust.im.activity.FriendSearchResultActivity;
 import com.sdust.im.databse.ImDB;
-import com.sdust.im.fragment.MessageFragment;
 import com.sdust.im.global.Result;
 import com.sdust.im.util.PhotoUtils;
 

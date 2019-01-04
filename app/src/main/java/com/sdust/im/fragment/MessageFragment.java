@@ -1,6 +1,5 @@
 package com.sdust.im.fragment;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.sdust.im.BaseDialog;
@@ -8,13 +7,9 @@ import com.sdust.im.R;
 import com.sdust.im.action.UserAction;
 import com.sdust.im.activity.ChatActivity;
 import com.sdust.im.activity.MainActivity;
-import com.sdust.im.activity.SearchFriendActivity;
-import com.sdust.im.activity.register.RegisterActivity;
-import com.sdust.im.adapter.FriendListAdapter;
 import com.sdust.im.adapter.FriendMessageAdapter;
 import com.sdust.im.bean.ApplicationData;
 import com.sdust.im.bean.MessageTabEntity;
-import com.sdust.im.bean.User;
 import com.sdust.im.databse.ImDB;
 import com.sdust.im.global.Result;
 import com.sdust.im.view.SlideCutListView;
@@ -30,11 +25,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.*;
-import android.view.View.OnClickListener;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 public class MessageFragment extends Fragment implements RemoveListener {
 

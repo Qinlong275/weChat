@@ -1,12 +1,7 @@
 package com.sdust.im.databse;
 
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import com.sdust.im.bean.ApplicationData;
 import com.sdust.im.bean.ChatEntity;

@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/search_bg">
 
     <com.sdust.im.view.TitleBarView
         android:id="@+id/title_bar"
@@ -12,9 +13,9 @@
         android:id="@+id/search_friend_by_name_edit_name"
         android:layout_width="match_parent"
         android:layout_height="39dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="75dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:hint="通过账号查找"
@@ -31,115 +32,6 @@
 
     <Button
         android:id="@+id/search_friend_by_name_btn_search"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/ll_user_info"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/login_btn"
-        android:text="查找"
-        android:textColor="@android:color/white" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="年龄"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/search_friend_by_else_spinner_lowage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:entries="@array/age_range" />
-
-            <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="——"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/search_friend_by_else_spinner_highage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:entries="@array/age_range" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/devide_line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="性别"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/search_friend_by_else_rgp_choose_sex"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_weight="2"
-                android:paddingLeft="5dp" >
-
-                <RadioButton
-                    android:id="@+id/search_friend_by_else_rdbtn_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="女" />
-
-                <RadioButton
-                    android:id="@+id/search_friend_by_else_rdbtn_male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="男" />
-
-                <RadioButton
-                    android:id="@+id/search_friend_by_else_rdbtn_both"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="全部" />
-            </RadioGroup>
-        </LinearLayout>
-    </LinearLayout>
-    
-    <Button
-        android:id="@+id/search_friend_by_else_btn_search"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/ll_user_info"

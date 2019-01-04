@@ -1,7 +1,6 @@
 package com.sdust.im.bean;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import com.sdust.im.global.Result;
 

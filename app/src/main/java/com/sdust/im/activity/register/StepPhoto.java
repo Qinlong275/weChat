@@ -2,16 +2,16 @@ package com.sdust.im.activity.register;
 
 import java.util.Date;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -21,16 +21,18 @@ import com.sdust.im.bean.TranObject;
 import com.sdust.im.bean.User;
 import com.sdust.im.global.Result;
 import com.sdust.im.util.PhotoUtils;
-import com.sdust.im.view.HandyTextView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StepPhoto extends RegisterStep implements OnClickListener {
 
-	private ImageView mIvUserPhoto;		//选择的头像
-	private LinearLayout mLayoutSelectPhoto;
-	private LinearLayout mLayoutTakePicture;
-	private LinearLayout mLayoutAvatars;
+	private ImageView mIvUserPhoto;        //选择的头像
 
-	private View[] mMemberBlocks;
+	private CircleImageView addButton;
+	private CircleImageView takePhoto;
+	private CircleImageView openAlbum;
+	private boolean start = true;        //标志底部制作照片按钮的状态
+
 	private String mTakePicturePath;
 	private Bitmap mUserPhoto;
 	private String mAccount;
@@ -66,14 +68,16 @@ public class StepPhoto extends RegisterStep implements OnClickListener {
 	@Override
 	public void initViews() {
 		mIvUserPhoto = (ImageView) findViewById(R.id.reg_photo_iv_userphoto);
-		mLayoutSelectPhoto = (LinearLayout) findViewById(R.id.reg_photo_layout_selectphoto);
-		mLayoutTakePicture = (LinearLayout) findViewById(R.id.reg_photo_layout_takepicture);
+		addButton = (CircleImageView) findViewById(R.id.icon_add);
+		takePhoto = (CircleImageView) findViewById(R.id.icon_take_photo);
+		openAlbum = (CircleImageView) findViewById(R.id.icon_album);
 	}
 
 	@Override
 	public void initEvents() {
-		mLayoutSelectPhoto.setOnClickListener(this);
-		mLayoutTakePicture.setOnClickListener(this);
+		openAlbum.setOnClickListener(this);
+		takePhoto.setOnClickListener(this);
+		addButton.setOnClickListener(this);
 	}
 
 	@Override
@@ -83,6 +87,42 @@ public class StepPhoto extends RegisterStep implements OnClickListener {
 			return false;
 		}
 		return true;
+	}
+
+	//展开工具栏
+	private void open() {
+		start = false;
+		ObjectAnimator translationLeft = new ObjectAnimator().ofFloat(takePhoto, "translationX", 0, -220f);
+		translationLeft.setDuration(500);
+		translationLeft.start();
+		ObjectAnimator translationRight = new ObjectAnimator().ofFloat(openAlbum, "translationX", 0, 220f);
+		translationRight.setDuration(500);
+		translationRight.start();
+		ObjectAnimator re = ObjectAnimator.ofFloat(addButton, "rotation", 0f, 90f);
+		AnimatorSet animatorSetsuofang = new AnimatorSet();//组合动画
+		ObjectAnimator scaleX = ObjectAnimator.ofFloat(addButton, "scaleX", 1, 0.8f);
+		ObjectAnimator scaleY = ObjectAnimator.ofFloat(addButton, "scaleY", 1, 0.8f);
+		animatorSetsuofang.setDuration(500);
+		animatorSetsuofang.play(scaleX).with(scaleY).with(re);
+		animatorSetsuofang.start();
+	}
+
+	//合上工具栏
+	private void close() {
+		start = true;
+		ObjectAnimator translationLeft = new ObjectAnimator().ofFloat(takePhoto, "translationX", -220, 0f);
+		translationLeft.setDuration(500);
+		translationLeft.start();
+		ObjectAnimator translationRight = new ObjectAnimator().ofFloat(openAlbum, "translationX", 220, 0f);
+		translationRight.setDuration(500);
+		translationRight.start();
+		ObjectAnimator re = ObjectAnimator.ofFloat(addButton, "rotation", 90f, 0f);
+		AnimatorSet animatorSetsuofang = new AnimatorSet();//组合动画
+		ObjectAnimator scaleX = ObjectAnimator.ofFloat(addButton, "scaleX", 0.8f, 1f);
+		ObjectAnimator scaleY = ObjectAnimator.ofFloat(addButton, "scaleY", 0.8f, 1f);
+		animatorSetsuofang.setDuration(500);
+		animatorSetsuofang.play(scaleX).with(scaleY).with(re);
+		animatorSetsuofang.start();
 	}
 
 	@Override
@@ -115,7 +155,7 @@ public class StepPhoto extends RegisterStep implements OnClickListener {
 								new Handler().postDelayed(new Runnable() {
 									@Override
 									public void run() {
-										if (!mIsReceived){
+										if (!mIsReceived) {
 											System.out.println("登陆遇到问题");
 											mIsReceived = true;
 											errorOccur = true;
@@ -129,7 +169,7 @@ public class StepPhoto extends RegisterStep implements OnClickListener {
 							System.out.println("");
 						}// 如果没收到的话就会一直阻塞;
 						mNetService.closeConnection();
-						if (errorOccur){
+						if (errorOccur) {
 							errorOccur = false;
 							return 0;
 						}
@@ -143,7 +183,7 @@ public class StepPhoto extends RegisterStep implements OnClickListener {
 
 				}
 				return 0;
-				
+
 			}
 
 			@Override
@@ -169,7 +209,7 @@ public class StepPhoto extends RegisterStep implements OnClickListener {
 		});
 	}
 
-	private void saveUserInfo(String account, String password){
+	private void saveUserInfo(String account, String password) {
 		SharedPreferences userSettings = mActivity.getApplicationContext().getSharedPreferences("user", 0);
 		SharedPreferences.Editor editor = userSettings.edit();
 		editor.putString("account", account);
@@ -180,13 +220,19 @@ public class StepPhoto extends RegisterStep implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.reg_photo_layout_selectphoto:
-			PhotoUtils.selectPhoto(mActivity);
-			break;
-
-		case R.id.reg_photo_layout_takepicture:
-			mTakePicturePath = PhotoUtils.takePicture(mActivity);
-			break;
+			case R.id.icon_add:
+				if (start) {
+					open();
+				} else {
+					close();
+				}
+				break;
+			case R.id.icon_album:
+				PhotoUtils.selectPhoto(mActivity);
+				break;
+			case R.id.icon_take_photo:
+				mTakePicturePath = PhotoUtils.takePicture(mActivity);
+				break;
 		}
 	}
 

@@ -18,11 +18,13 @@ import com.sdust.im.R;
 import com.sdust.im.view.HeaderSpinner.onSpinnerClickListener;
 import com.sdust.im.view.SwitcherButton.onSwitcherButtonClickListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HeaderLayout extends LinearLayout {
 
 	private LayoutInflater mInflater;
 	private View mHeader;
-	private ImageView mIvLogo;
+	private CircleImageView mIvLogo;
 	private LinearLayout mLayoutLeftContainer;
 	private LinearLayout mLayoutMiddleContainer;
 	private LinearLayout mLayoutRightContainer;
@@ -75,7 +77,7 @@ public class HeaderLayout extends LinearLayout {
 	}
 
 	public void initViews() {
-		mIvLogo = (ImageView) findViewByHeaderId(R.id.header_iv_logo);
+		mIvLogo = (CircleImageView) findViewByHeaderId(R.id.header_iv_logo);
 		mIvLogo.setVisibility(View.VISIBLE);
 		mLayoutLeftContainer = (LinearLayout) findViewByHeaderId(R.id.header_layout_leftview_container);
 		mLayoutLeftContainer.setVisibility(View.VISIBLE);

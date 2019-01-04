@@ -6,7 +6,6 @@ import java.net.Socket;
 import com.sdust.im.bean.TranObject;
 
 import android.content.Context;
-import android.util.Log;
 
 //网络连接服务管理类
 public class NetService {

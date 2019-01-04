@@ -9,7 +9,6 @@ import com.sdust.im.bean.ChatEntity;
 import com.sdust.im.bean.TranObject;
 import com.sdust.im.bean.TranObjectType;
 import com.sdust.im.bean.User;
-import com.sdust.im.databse.ImDB;
 import com.sdust.im.global.Result;
 import com.sdust.im.network.NetService;
 
